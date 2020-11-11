@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const bodyParser = require('body-parser');
+const userRouter = require('./routes/User');
 
 const app = express();
 
-app.get('/',(req,res)=>{
-    return res.send("Lets rock it bro");
-});
+app.use(bodyParser.json());
+app.use('/user',userRouter);
 
 mongoose.connect('mongodb://localhost:27017/amazon',{useNewUrlParser:true,useUnifiedTopology:true},(err)=>{
     if(err){

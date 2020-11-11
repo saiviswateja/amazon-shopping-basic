@@ -20,7 +20,6 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true
     }
-    //TODO: requried to code for hashing the password
 });
 
 userSchema.virtual('password')
