@@ -1,5 +1,5 @@
-const { isValidObjectId } = require("mongoose");
 const User = require("../models/User");
+const jwt = require('jsonwebtoken');
 
 exports.SignUp = (req,res)=>{
     const user = new User(req.body);
@@ -46,10 +46,12 @@ exports.SignIn = (req,res)=>{
                 success:false
             });
         }
+        const token = jwt.sign({_id:user.id},"secret");
         return res.json({
             error:"",
             success:true,
-            user:user
+            user:user,
+            token:token
         });
     })
 }
