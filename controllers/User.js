@@ -1,5 +1,5 @@
+const { isValidObjectId } = require("mongoose");
 const User = require("../models/User");
-const { use } = require("../routes/User");
 
 exports.SignUp = (req,res)=>{
     const user = new User(req.body);
@@ -32,5 +32,24 @@ exports.SignUp = (req,res)=>{
 }
 
 exports.SignIn = (req,res)=>{
-    return res.send(req.body);
+    const {email,password} = req.body;
+    User.findOne({email},(err,user)=>{
+        if(err||!user){
+            return res.json({
+                error:"No user found with the mentioned mail id",
+                success:false
+            });
+        }
+        if(!user.authenticate(password)){
+            return res.json({
+                error:"Email or password didnt match",
+                success:false
+            });
+        }
+        return res.json({
+            error:"",
+            success:true,
+            user:user
+        });
+    })
 }
