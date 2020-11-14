@@ -46,7 +46,7 @@ exports.SignIn = (req,res)=>{
                 success:false
             });
         }
-        const token = jwt.sign({_id:user.id},"secret");
+        const token = jwt.sign({_id:user._id},"secret");
         return res.json({
             error:"",
             success:true,
