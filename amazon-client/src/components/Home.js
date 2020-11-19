@@ -1,13 +1,31 @@
-import React from 'react'
-import Navbar from './Navbar'
+import React,{useEffect,useState} from 'react';
+import Navbar from './Navbar';
+
 
 function Home() {
+    const [products,setProducts] = useState([]);
+    useEffect(() => {
+        
+    });
     return (
-        <div>
+        <>
             <Navbar/>
-            <h1>Home</h1>
-        </div>
+            <div className="container-fluid">
+                <div className="card">
+                    <div className="row">
+                        <div className="col">
+                            <div>
+
+                            </div>
+                        </div>
+                        <div className="col">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 
-export default Home
+export default Home;
