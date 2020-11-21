@@ -1,0 +1,22 @@
+.logo_admin{
+    justify-content: center;
+}
+
+.title{
+    justify-content: center;
+}
+
+.fieldname{
+    padding-bottom: 10%;
+    padding-left: 7%;
+}
+
+.input_field{
+    width: 100%;
+    margin-bottom: 4%;
+}
+
+.admin_login_button{
+    margin-top: 5%;
+    margin-left: 6%;
+}
