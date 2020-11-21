@@ -7,9 +7,14 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 function Navbar() {
     return (
         <div>
-            <nav class="navbar navbar-expand-lg">
-            <div></div>
-            <Link class="navbar-brand" href="#"><img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"></img></Link>
+            <nav class="navbar sticky-top navbar-expand-lg">
+            <div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+            <Link class="navbar-brand" href="#"><img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" style={{height:'50px',width:'150px',paddingTop:"5%",paddingRight:"10%"}}></img></Link>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 
