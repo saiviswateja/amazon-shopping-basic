@@ -430,6 +430,8 @@ function Home() {
     return (
         <>
             <Navbar/>
+            <br></br>
+            <br/>
             <div>
                 <div id="carouselExampleControls" class="carousel slide carousel_contain carousel_manual" data-ride="carousel">
                     <div class="carousel-inner">

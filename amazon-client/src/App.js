@@ -3,6 +3,7 @@ import {BrowserRouter as Router,Switch,Link, Route} from 'react-router-dom';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Admin from './components/Admin';
+import AddProducts from './components/AddProducts';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
                   </Route>
                   <Route path="/admin" exact>
                     <Admin/>
+                  </Route>
+                  <Route path="/admin/products">
+                    <AddProducts/>
                   </Route>
               </Switch>
         </Router>

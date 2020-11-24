@@ -5,9 +5,14 @@ const bodyParser = require('body-parser');
 const userRouter = require('./routes/User');
 const adminRouter = require('./routes/Admin');
 const productRouter = require('./routes/Product');
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 const app = express();
 
+app.use(cors());
+app.use(express.static('public'));
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use('/user',userRouter);
 app.use('/admin',adminRouter);
