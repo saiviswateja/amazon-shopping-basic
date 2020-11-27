@@ -59,4 +59,5 @@ function CategoryCardSubGroup() {
     )
 }
 
-export default CategoryCardSubGroup
+
+export default (CategoryCardSubGroup);
