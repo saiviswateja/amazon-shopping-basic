@@ -5,27 +5,35 @@ import Admin from './components/Admin';
 import AddProducts from './components/AddProducts';
 import ProductsPage from './components/ProductsPages';
 import { connect } from 'react-redux';
+import {useEffect} from 'react';
 import retrieveProducts from './store/actions/retrieveProducts';
+import { UserProvider } from './userContext';
+import store from './store/index';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    {props.retreiveProducts()}
+  }, [])
   return (
     <div>
-        <Router>
-              <Switch>
-                  <Route path="/" exact>
-                      <Home/>
-                  </Route>
-                  <Route path="/admin" exact>
-                    <Admin/>
-                  </Route>
-                  <Route path="/admin/products">
-                    <AddProducts/>
-                  </Route>
-                  <Route path="/products" exact>
-                    <ProductsPage/>
-                  </Route>
-              </Switch>
-        </Router>
+        <UserProvider value={store}>
+            <Router>
+                  <Switch>
+                      <Route path="/" exact>
+                          <Home/>
+                      </Route>
+                      <Route path="/admin" exact>
+                        <Admin/>
+                      </Route>
+                      <Route path="/admin/products">
+                        <AddProducts/>
+                      </Route>
+                      <Route path="/products" exact>
+                        <ProductsPage/>
+                      </Route>
+                  </Switch>
+            </Router>
+        </UserProvider>
     </div>
   );
 }

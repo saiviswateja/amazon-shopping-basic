@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import productReducer from './reducers/productReducer';
 
 const intialState = {
-    products:["hdsfkjhskjd"],
+    products:[],
     user:{"name":"viswa"}
 }
 

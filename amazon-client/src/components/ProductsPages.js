@@ -1,24 +1,46 @@
-import {useEffect} from 'react';
+import {useEffect,useContext,useState} from 'react';
 import Navbar from './Navbar';
-import {connect} from 'react-redux';
+import UserContext from '../userContext';
+import { makeStyles } from '@material-ui/core/styles';
+import ProductCard from './ProductCard';
 
-function ProductsPage(props){
+const useStyles = makeStyles({
+    root: {
+      maxWidth: 345,
+    },
+  });
+
+function ProductsPage(){
+    const classes = useStyles();
+    const context = useContext(UserContext);
+    const [products,setProducts] = useState([]);
+    var allProducts = [];
     useEffect(() => {
-        console.log(props.products)
-    }, [])
+        setProducts(context.getState().products);
+    });
     return (
         <>
             <Navbar/>
+            <div>
+                <br/>
+                <br/>
+                <br/>
+                {products.length===0 ? <h1>Not get productss</h1> :
+                <div className="container">
+                <div className="row">
+                 {
+                    Object.values(products).map(productCategory=>{
+                            return productCategory.map(product=>{
+                                return <ProductCard productDetails={product}/>
+                            });
+                    }) 
+                 }
+                </div>
+                </div>
+                }
+            </div>
         </>
     )
 }
 
-const MapStateToProps = (state)=>{
-    return {
-        products:state.products,
-        user:state.user
-    }
-}
-
-
-export default connect(MapStateToProps,null)(ProductsPage);
+export default (ProductsPage);

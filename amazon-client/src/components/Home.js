@@ -1,16 +1,18 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useContext} from 'react';
 import Navbar from './Navbar';
 import '../css/Home.css';
-import {connect} from 'react-redux';
 import CategoryCardGroup from './CategoryCardGroup';
 import CategoryCardSubGroup from './CategoryCardSubGroup';
-import retrieveProducts from '../store/actions/retrieveProducts';
+import UserContext from '../userContext';
 
-function Home(props) {
+function Home() {
+    const context = useContext(UserContext);
     const [products,setProducts] = useState([]);
-    useEffect(()=>{
-        props.retreiveProducts();
-    },[])
+    var allProducts = [];
+    useEffect(() => {
+        console.log(context.getState().products);
+        setProducts(context.getState().products)
+    });
     return (
         <>
             <Navbar/>
@@ -40,27 +42,29 @@ function Home(props) {
                 </div>
             </div>
             <div className="container-fluid products_container">
-                <CategoryCardGroup/>
-                <CategoryCardSubGroup/>
-                <CategoryCardGroup/>
+                {products.length===0? <h1>No products in electronics category</h1>:
+                     <CategoryCardGroup productsList={products.Electronics}/>
+                }
+                <CategoryCardSubGroup productsListSports={products.Sports} productsListHome={products.HomeKitchen}/>
+                <CategoryCardGroup productsList={products.Books}/>
             </div>
         </>
     )
 }
 
-const MapStateToProps = (state)=>{
-    return {
-        products:state.products,
-        user:state.user
-    }
-}
+// const MapStateToProps = (state)=>{
+//     return {
+//         products:state.products,
+//         user:state.user
+//     }
+// }
 
-const MapDispatchToProps = (dispatch)=>{
-    return {
-        retreiveProducts: ()=>dispatch(retrieveProducts)
-    }
-}
+// const MapDispatchToProps = (dispatch)=>{
+//     return {
+//         retreiveProducts: ()=>dispatch(retrieveProducts)
+//     }
+// }
 
-// export default Home;
+export default Home;
 
-export default connect(MapStateToProps,MapDispatchToProps)(Home);
+// export default connect(MapStateToProps,MapDispatchToProps)(Home);
