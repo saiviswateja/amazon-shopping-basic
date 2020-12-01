@@ -1,7 +1,9 @@
 import {useEffect,useContext,useState} from 'react';
 import Navbar from './Navbar';
+import {useStore} from 'react-redux';
 import UserContext from '../userContext';
 import { makeStyles } from '@material-ui/core/styles';
+
 import ProductCard from './ProductCard';
 
 const useStyles = makeStyles({

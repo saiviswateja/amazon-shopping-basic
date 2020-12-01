@@ -9,6 +9,7 @@ import {useEffect} from 'react';
 import retrieveProducts from './store/actions/retrieveProducts';
 import { UserProvider } from './userContext';
 import store from './store/index';
+import UserLogin from './components/UserLogin';
 
 function App(props) {
   useEffect(() => {
@@ -30,6 +31,9 @@ function App(props) {
                       </Route>
                       <Route path="/products" exact>
                         <ProductsPage/>
+                      </Route>
+                      <Route path="/login">
+                        <UserLogin/>
                       </Route>
                   </Switch>
             </Router>

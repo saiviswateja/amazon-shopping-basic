@@ -1,14 +1,18 @@
 import React from 'react';
-import { useState } from 'react';
+import { useContext } from 'react';
 import {Link} from 'react-router-dom';
-import '../css/Admin.css';
+import UserContext from '../userContext';
 
-
-function Admin() {
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
+function UserLogin() {
+    const context = useContext(UserContext);
     const handleChange = ()=>{
-        console.log(email+ " "+password);
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const loginDetails = {
+            email,
+            password
+        }
+        context.dispatch({type:"TESTING_REDUX",payload:{loginDetails}});
     }
     return (
         <div>
@@ -20,18 +24,18 @@ function Admin() {
                     <div className="card" style={{width:"20rem"}}>
                         <div className="card-body">
                             <div className="row title">
-                                <h3 className="card-title">Admin Login</h3>
+                                <h3 className="card-title">User Login</h3>
                             </div>
                             <div className="row fieldname">
                                 <small><b>Email or mobile phone number</b></small>
                             </div>
-                            <input className="form-control input_field"></input>
+                            <input className="form-control input_field" id="email"></input>
                             <div className="row fieldname">
                                 <small><b>Password</b></small>
                             </div>
-                            <input className="form-control input_field"></input>
+                            <input className="form-control input_field" id="password"></input>
                             <div className="row">
-                                <button className="btn btn-warning admin_login_button">Login</button>
+                            <button className="btn btn-warning admin_login_button" onClick={handleChange}>Login</button>
                             </div>
                         </div>
                     </div>
@@ -41,4 +45,4 @@ function Admin() {
     )
 }
 
-export default Admin;
+export default UserLogin;
