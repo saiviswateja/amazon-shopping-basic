@@ -1,10 +1,9 @@
 import React from 'react';
-import { useContext } from 'react';
-import {Link} from 'react-router-dom';
-import UserContext from '../userContext';
+import axios from 'axios';
+import {Link,useHistory} from 'react-router-dom';
 
 function UserLogin() {
-    const context = useContext(UserContext);
+    const history = useHistory();
     const handleChange = ()=>{
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
@@ -12,7 +11,19 @@ function UserLogin() {
             email,
             password
         }
-        context.dispatch({type:"TESTING_REDUX",payload:{loginDetails}});
+        axios.post('http://localhost:8000/user/signin',{
+            "email":"saiviswateja@gmail.com",
+            "password":"123466"
+        })
+        .then(response=>{
+            if(!response.data.success){
+                console.log("Invalid username");
+                return
+            }
+            localStorage.setItem("user",JSON.stringify(response.data.user));
+            localStorage.setItem("token",response.data.token);
+            history.push('/');
+        });
     }
     return (
         <div>

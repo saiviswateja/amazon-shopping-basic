@@ -1,24 +1,17 @@
-import {useEffect,useContext,useState} from 'react';
+import {useEffect,useState} from 'react';
 import Navbar from './Navbar';
-import {useStore} from 'react-redux';
-import UserContext from '../userContext';
-import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 import ProductCard from './ProductCard';
 
-const useStyles = makeStyles({
-    root: {
-      maxWidth: 345,
-    },
-  });
-
 function ProductsPage(){
-    const classes = useStyles();
-    const context = useContext(UserContext);
     const [products,setProducts] = useState([]);
     var allProducts = [];
     useEffect(() => {
-        setProducts(context.getState().products);
+        axios.get('http://localhost:8000/product/products')
+        .then(response=>{
+            setProducts(response.data.categoryProducts)
+        });
     });
     return (
         <>

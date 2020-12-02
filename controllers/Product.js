@@ -16,8 +16,8 @@ exports.getAllProducts = (req,res)=>{
                 success:false
             });
         }
+        console.log("calling the product controller");
         products.map(product=>{
-            console.log(product.category);
             switch(product.category){
                 case Cateogaries[0]:
                     categoryProducts.Electronics.push(product);

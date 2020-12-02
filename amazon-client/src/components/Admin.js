@@ -8,7 +8,7 @@ function Admin() {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const handleChange = ()=>{
-        console.log(email+ " "+password);
+        console.log(email+ " "+password)
     }
     return (
         <div>
@@ -31,7 +31,7 @@ function Admin() {
                             </div>
                             <input className="form-control input_field"></input>
                             <div className="row">
-                                <button className="btn btn-warning admin_login_button">Login</button>
+                            <button className="btn btn-warning admin_login_button">Login</button>
                             </div>
                         </div>
                     </div>

@@ -3,16 +3,16 @@ import Navbar from './Navbar';
 import '../css/Home.css';
 import CategoryCardGroup from './CategoryCardGroup';
 import CategoryCardSubGroup from './CategoryCardSubGroup';
-import UserContext from '../userContext';
+import axios from 'axios';
 
-function Home() {
-    const context = useContext(UserContext);
+function Home(props) {
     const [products,setProducts] = useState([]);
-    var allProducts = [];
     useEffect(() => {
-        console.log(context.getState().products);
-        setProducts(context.getState().products)
-    });
+        axios.get('http://localhost:8000/product/products')
+        .then(response=>{
+            setProducts(response.data.categoryProducts)
+        });
+    },[]);
     return (
         <>
             <Navbar/>
@@ -52,19 +52,6 @@ function Home() {
     )
 }
 
-// const MapStateToProps = (state)=>{
-//     return {
-//         products:state.products,
-//         user:state.user
-//     }
-// }
 
-// const MapDispatchToProps = (dispatch)=>{
-//     return {
-//         retreiveProducts: ()=>dispatch(retrieveProducts)
-//     }
-// }
+export default (Home);
 
-export default Home;
-
-// export default connect(MapStateToProps,MapDispatchToProps)(Home);
