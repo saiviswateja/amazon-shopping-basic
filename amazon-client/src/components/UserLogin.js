@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Link,useHistory} from 'react-router-dom';
 
+
 function UserLogin() {
     const history = useHistory();
+    const [tryLoggedIn,settryLoggedIn] = useState(false);
+    useEffect(()=>{
+        if(localStorage.getItem("user")!==null){
+            history.push('/')
+        }
+    },[])
     const handleChange = ()=>{
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
@@ -11,14 +18,11 @@ function UserLogin() {
             email,
             password
         }
-        axios.post('http://localhost:8000/user/signin',{
-            "email":"saiviswateja@gmail.com",
-            "password":"123466"
-        })
+        axios.post('http://localhost:8000/user/signin',loginDetails)
         .then(response=>{
             if(!response.data.success){
-                console.log("Invalid username");
-                return
+                settryLoggedIn(true)
+                return;
             }
             localStorage.setItem("user",JSON.stringify(response.data.user));
             localStorage.setItem("token",response.data.token);
@@ -48,6 +52,9 @@ function UserLogin() {
                             <div className="row">
                             <button className="btn btn-warning admin_login_button" onClick={handleChange}>Login</button>
                             </div>
+                            {tryLoggedIn && <div class="alert alert-danger" role="alert" style={{marginTop:"10%"}}>
+                                Invalid Credentials
+                            </div>}
                         </div>
                     </div>
                 </div>

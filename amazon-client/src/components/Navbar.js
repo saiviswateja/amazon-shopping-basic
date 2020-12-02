@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import '../css/Navbar.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 function Navbar() {
+    const [user,setUser] = useState(null);
+    const [userLoggedIn,setuserLoggedIn] = useState(false);
+    useEffect(()=>{
+        if(localStorage.getItem("user")!==null){
+            setUser(JSON.parse(localStorage.getItem("user")));
+            setuserLoggedIn(true);
+        }
+        console.log(user);
+    },[])
+    useEffect(()=>{
+        console.log(user);
+    },[user])
     return (
         <div>
             <nav class="navbar fixed-top navbar-expand-lg">
@@ -22,7 +34,8 @@ function Navbar() {
                                 Hello, 
                             </div>
                             <div className="row font-weight-bold">
-                                Sign In 
+                                {console.log(userLoggedIn)}
+                                {user===null?<span>Sign In</span>:<span>{user.name}</span>}
                             </div>
                         </div>
                     </li>
