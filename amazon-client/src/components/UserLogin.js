@@ -55,6 +55,12 @@ function UserLogin() {
                             {tryLoggedIn && <div class="alert alert-danger" role="alert" style={{marginTop:"10%"}}>
                                 Invalid Credentials
                             </div>}
+                            <hr></hr>
+                            <div>
+                                <button style={{marginLeft:"15%"}} onClick={()=>{
+                                    history.push('/signup');
+                                }}>Create an Account</button>
+                            </div>
                         </div>
                     </div>
                 </div>

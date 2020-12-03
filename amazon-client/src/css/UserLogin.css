@@ -1,3 +1,8 @@
 .user_logo{
     justify-content: center;
 }
+
+#createAccount{
+    justify-items: center;
+    width: max-content;
+}

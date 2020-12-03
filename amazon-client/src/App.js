@@ -6,6 +6,7 @@ import AddProducts from './components/AddProducts';
 import ProductsPage from './components/ProductsPages';
 import Test from './components/Test';
 import UserLogin from './components/UserLogin';
+import UserSignup from './components/UserSignup';
 
 function App() {
   return (
@@ -24,11 +25,11 @@ function App() {
                       <Route path="/products" exact>
                         <ProductsPage/>
                       </Route>
-                      <Route path="/login">
+                      <Route path="/login" exact>
                         <UserLogin/>
                       </Route>
-                      <Route>
-                        <Test/>
+                      <Route path="/signup" exact>
+                        <UserSignup/>
                       </Route>
                   </Switch>
             </Router>

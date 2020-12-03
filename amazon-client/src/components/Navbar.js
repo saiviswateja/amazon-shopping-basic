@@ -3,10 +3,14 @@ import {Link} from 'react-router-dom';
 import '../css/Navbar.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import {useHistory} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { AnimationWrapper } from 'react-hover-animation';
 
 function Navbar() {
     const [user,setUser] = useState(null);
     const [userLoggedIn,setuserLoggedIn] = useState(false);
+    const history = useHistory();
     useEffect(()=>{
         if(localStorage.getItem("user")!==null){
             setUser(JSON.parse(localStorage.getItem("user")));
@@ -28,16 +32,23 @@ function Navbar() {
                 <SearchIcon className="searchIcon" fontSize="large"/>
                 <ul class="navbar-nav mr-auto">
                     
-                    <li class="nav-item hello_signin">
+                    <li class="nav-item hello_signin hello_nav">
+                        <AnimationWrapper>
                         <div>
                             <div className="row">
                                 Hello, 
                             </div>
                             <div className="row font-weight-bold">
                                 {console.log(userLoggedIn)}
-                                {user===null?<span>Sign In</span>:<span>{user.name}</span>}
+                                {user===null?<span onClick={()=>{
+                                    history.push('/login');
+                                }}>Sign In</span>:<span title="click here log out" onClick={()=>{
+                                    localStorage.clear();
+                                    history.push('/login');
+                                }}>{user.name}<ExitToAppIcon/></span>}
                             </div>
                         </div>
+                        </AnimationWrapper>
                     </li>
                     <li class="nav-item hello_signin">
                         <div>
