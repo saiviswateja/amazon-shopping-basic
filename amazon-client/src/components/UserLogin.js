@@ -33,7 +33,7 @@ function UserLogin() {
         <div>
             <div>
                 <div className="row logo_admin">
-                    <Link class="navbar-brand" href="#"><img src="https://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG" style={{height:'50px',width:'150px',paddingTop:"5%",paddingRight:"10%"}}></img></Link>
+                    <Link class="navbar-brand" to="/"><img src="https://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG" style={{height:'50px',width:'150px',paddingTop:"5%",paddingRight:"10%"}}></img></Link>
                 </div>
                 <div className="row logo_admin">
                     <div className="card" style={{width:"20rem"}}>

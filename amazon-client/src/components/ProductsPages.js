@@ -12,7 +12,7 @@ function ProductsPage(){
         .then(response=>{
             setProducts(response.data.categoryProducts)
         });
-    });
+    },[]);
     return (
         <>
             <Navbar/>

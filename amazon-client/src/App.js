@@ -4,9 +4,9 @@ import Home from './components/Home';
 import Admin from './components/Admin';
 import AddProducts from './components/AddProducts';
 import ProductsPage from './components/ProductsPages';
-import Test from './components/Test';
 import UserLogin from './components/UserLogin';
 import UserSignup from './components/UserSignup';
+import Checkout from './components/Checkout';
 
 function App() {
   return (
@@ -30,6 +30,9 @@ function App() {
                       </Route>
                       <Route path="/signup" exact>
                         <UserSignup/>
+                      </Route>
+                      <Route path="/checkout">
+                        <Checkout/>
                       </Route>
                   </Switch>
             </Router>

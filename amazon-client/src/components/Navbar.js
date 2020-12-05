@@ -9,22 +9,30 @@ import { AnimationWrapper } from 'react-hover-animation';
 
 function Navbar() {
     const [user,setUser] = useState(null);
+    const [inCheckout,setIncheckout] = useState(false);
     const [userLoggedIn,setuserLoggedIn] = useState(false);
+    const [cartCount,setCartCount] = useState(0);
     const history = useHistory();
     useEffect(()=>{
+        console.log(window.location.href);
+        if(window.location.href.includes("checkout")){
+            setIncheckout(true)
+        }
         if(localStorage.getItem("user")!==null){
             setUser(JSON.parse(localStorage.getItem("user")));
             setuserLoggedIn(true);
         }
-        console.log(user);
+        if(localStorage.getItem("products")!==null){
+            setCartCount(JSON.parse(localStorage.getItem("products")).length);
+        }
     },[])
-    useEffect(()=>{
-        console.log(user);
-    },[user])
+    useEffect(() => {
+        
+    }, [cartCount])
     return (
         <div>
             <nav class="navbar fixed-top navbar-expand-lg">
-            <Link class="navbar-brand" href="#"><img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" style={{height:'50px',width:'150px',paddingTop:"5%",paddingRight:"10%"}}></img></Link>
+            <Link class="navbar-brand" to="/"><img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" style={{height:'50px',width:'150px',paddingTop:"5%",paddingRight:"10%"}}></img></Link>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 
@@ -39,7 +47,6 @@ function Navbar() {
                                 Hello, 
                             </div>
                             <div className="row font-weight-bold">
-                                {console.log(userLoggedIn)}
                                 {user===null?<span onClick={()=>{
                                     history.push('/login');
                                 }}>Sign In</span>:<span title="click here log out" onClick={()=>{
@@ -60,10 +67,18 @@ function Navbar() {
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item basket">
+                    <AnimationWrapper>
+                    <li class="nav-item basket" onClick={()=>{
+                        if(localStorage.getItem("token")==null){
+                            history.push('/login');
+                            return
+                        }
+                        history.push('/checkout');
+                    }}>
                         <ShoppingBasketIcon fontSize="large" className="font-weight-bold"/>
-                        <span className="font-weight-bold count_product">0</span>
+                        {/* {!inCheckout ? <h1></h1>:<span className="font-weight-bold count_product">{cartCount}</span>} */}
                     </li>
+                    </AnimationWrapper>
                 </ul>
             </div>
             </nav>
