@@ -17,7 +17,7 @@ export const addProductToCart = (product)=>{
         return;
     }
     console.log(localStorage.getItem("products"));
-    if(localStorage.getItem("products")!==null){
+    if(localStorage.getItem("products")!==null && Array.isArray(JSON.parse(localStorage.getItem("products")))){
         console.log((JSON.parse(localStorage.getItem("products"))));
         cartProducts.length = 0;
         JSON.parse(localStorage.getItem("products")).map(pr=>{

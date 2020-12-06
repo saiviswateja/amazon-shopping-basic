@@ -22,7 +22,7 @@ function Navbar() {
             setUser(JSON.parse(localStorage.getItem("user")));
             setuserLoggedIn(true);
         }
-        if(localStorage.getItem("products")!==null){
+        if(localStorage.getItem("products")!==null && Array.isArray(JSON.parse(localStorage.getItem("products")))){
             setCartCount(JSON.parse(localStorage.getItem("products")).length);
         }
     },[])

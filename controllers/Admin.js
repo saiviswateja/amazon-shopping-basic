@@ -45,6 +45,7 @@ exports.postProducts = (req,res)=>{
 }
 
 exports.signIn = (req,res)=>{
+    console.log("came here jhfkjh");
     Admin.find({name:req.body.name},(err,user)=>{
         if(err){
             return res.json({
@@ -52,9 +53,11 @@ exports.signIn = (req,res)=>{
                 success:false
             })
         }
+        console.log(user)
         if(user[0])
         if(user[0].password===req.body.password){
-            const token = jwt.sign({_id:user._id},"secret")
+            console.log(user[0]._id);
+            const token = jwt.sign({_id:user[0]._id},"secret")
             return res.json({
                 error:"",
                 success:true,

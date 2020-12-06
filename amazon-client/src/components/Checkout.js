@@ -15,6 +15,7 @@ function Checkout() {
     }, [productArray])
     const totalPrice= ()=>{
         var t = 0;
+        if(productArray!==null)
         productArray.map(product=>{
             console.log(product.price);
             t = t+ parseInt(product.price);
@@ -55,7 +56,8 @@ function Checkout() {
             <div className="container-fluid">
                 <div className="row" style={{backgroundColor:"white"}}>
                     <div className="col">
-                        {typeof productArray.length!=="undefined" &&
+                        {console.log(productArray)}
+                        {productArray!==null &&
                         <div style={{marginTop:"2%"}}>
                             <h1>Checkout</h1>
                             <div className="container-fluid scroll">
@@ -87,9 +89,9 @@ function Checkout() {
                     <div className="col">
                         <div class="jumbotron">
                     <h1 class="display-4">Total Price: {price}</h1>
-                            <p class="lead">Hi Viswa, Dont worry they will be get delivered to your door as soon as possible</p>
+                            <p class="lead">Hi {JSON.parse(localStorage.getItem("user")).name}, Dont worry they will be get delivered to your door as soon as possible</p>
                             <hr class="my-4"/>
-                            <p>You have {productArray.length} in your cart</p>
+                            <p>You have {productArray!==null?productArray.length:0} in your cart</p>
                             <p class="lead">
                                 {
                                     price===0?

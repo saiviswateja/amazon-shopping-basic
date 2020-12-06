@@ -2,13 +2,34 @@ import React from 'react';
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import '../css/Admin.css';
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
 
 
 function Admin() {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const history = useHistory();
     const handleChange = ()=>{
-        console.log(email+ " "+password)
+        console.log("came to hande change component event");
+        const name = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const loginDetails = {
+            name,
+            password
+        }
+        console.log(loginDetails);
+        axios.post('http://localhost:8000/admin/signin',loginDetails)
+        .then(response=>{
+            console.log(response);
+            // if(!response.data.success){
+            //     settryLoggedIn(true)
+            //     return;
+            // }
+            localStorage.setItem("adminUser",JSON.stringify(response.data.user));
+            localStorage.setItem("admintoken",response.data.token);
+            history.push('/admin/products');
+        });
     }
     return (
         <div>
@@ -25,13 +46,32 @@ function Admin() {
                             <div className="row fieldname">
                                 <small><b>Email or mobile phone number</b></small>
                             </div>
-                            <input className="form-control input_field"></input>
+                            <input className="form-control input_field" id="email"></input>
                             <div className="row fieldname">
                                 <small><b>Password</b></small>
                             </div>
-                            <input className="form-control input_field"></input>
+                            <input className="form-control input_field" id="password"></input>
                             <div className="row">
-                            <button className="btn btn-warning admin_login_button">Login</button>
+                            <button className="btn btn-warning admin_login_button" onClick={()=>{
+                                 console.log("came to hande change component event");
+                                 const name = document.getElementById("email").value;
+                                 const password = document.getElementById("password").value;
+                                 const loginDetails = {
+                                     name,
+                                     password
+                                 }
+                                 console.log(loginDetails);
+                                 axios.post('http://localhost:8000/admin/signin',loginDetails)
+                                 .then(response=>{
+                                     console.log(response);
+                                     if(!response.data.success){
+                                         return;
+                                     }
+                                    //  localStorage.setItem("user",JSON.stringify(response.data.user));
+                                     localStorage.setItem("adminToken",response.data.token);
+                                     history.push('/admin/products');
+                                 });
+                            }}>Login</button>
                             </div>
                         </div>
                     </div>
